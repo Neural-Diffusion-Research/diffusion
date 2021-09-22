@@ -21,7 +21,9 @@ def search():
     diffusion = Diffusion(np.vstack([queries, gallery]), args.cache_dir)
     offline = diffusion.get_offline_results(args.truncation_size, args.kd)
     features = preprocessing.normalize(offline, norm="l2", axis=1)
+    print(f'features : {np.shape(features)}')
     scores = features[:n_query] @ features[n_query:].T
+    print(f'scores : {np.shape(scores)}')
     ranks = np.argsort(-scores.todense())
     evaluate(ranks)
 
@@ -106,5 +108,7 @@ if __name__ == "__main__":
         os.makedirs(args.cache_dir)
     dataset = Dataset(args.query_path, args.gallery_path)
     queries, gallery = dataset.queries, dataset.gallery
+    print(f'queries : {np.shape(queries)}')
+    print(f'gallery : {np.shape(gallery)}')
     search()
 
