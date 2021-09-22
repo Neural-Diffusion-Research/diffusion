@@ -25,6 +25,7 @@ def search():
     scores = features[:n_query] @ features[n_query:].T
     print(f'scores : {np.shape(scores)}')
     ranks = np.argsort(-scores.todense())
+    print(f'ranks : {np.shape(ranks)}')
     evaluate(ranks)
 
 
