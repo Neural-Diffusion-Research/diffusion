@@ -19,7 +19,9 @@ from evaluate import compute_map_and_print
 def search():
     n_query = len(queries)
     diffusion = Diffusion(np.vstack([queries, gallery]), args.cache_dir)
+    print(f'diffusion : {np.shape(diffusion)}')
     offline = diffusion.get_offline_results(args.truncation_size, args.kd)
+    print(f'offline : {np.shape(offline)}')
     features = preprocessing.normalize(offline, norm="l2", axis=1)
     print(f'features : {np.shape(features)}')
     print(f'features[:n_query] : {np.shape(features[:n_query])}')
