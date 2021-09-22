@@ -22,6 +22,8 @@ def search():
     offline = diffusion.get_offline_results(args.truncation_size, args.kd)
     features = preprocessing.normalize(offline, norm="l2", axis=1)
     print(f'features : {np.shape(features)}')
+    print(f'features[:n_query] : {np.shape(features[:n_query])}')
+    print(f'features[n_query:].T : {np.shape(features[n_query:].T)}')
     scores = features[:n_query] @ features[n_query:].T
     print(f'scores : {np.shape(scores)}')
     ranks = np.argsort(-scores.todense())
