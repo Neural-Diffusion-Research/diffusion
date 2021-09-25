@@ -19,7 +19,6 @@ from evaluate import compute_map_and_print
 def search():
     n_query = len(queries)
     diffusion = Diffusion(np.vstack([queries, gallery]), args.cache_dir)
-    print(f'diffusion : {np.shape(diffusion)}')
     offline = diffusion.get_offline_results(args.truncation_size, args.kd)
     print(f'offline : {np.shape(offline)}')
     features = preprocessing.normalize(offline, norm="l2", axis=1)
@@ -117,3 +116,16 @@ if __name__ == "__main__":
     print(f'gallery : {np.shape(gallery)}')
     search()
 
+"""
+queries : (55, 2048)
+gallery : (5063, 2048)
+diffusion : ()
+[cache] loading ./tmp/oxford5k_resnet/offline.jbl costs 0.04s
+offline : (5118, 5118)
+features : (5118, 5118)
+features[:n_query] : (55, 5118)
+features[n_query:].T : (5118, 5063)
+scores : (55, 5063)
+ranks : (55, 5063)
+>> oxford5k: mAP 93.10
+"""
