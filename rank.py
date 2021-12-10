@@ -24,7 +24,7 @@ def search():
     features = preprocessing.normalize(offline, norm="l2", axis=1)
     print(f'features : {np.shape(features)}')
     print(f'features[:n_query] : {np.shape(features[:n_query])}')
-    print(f'features[n_query:].T : {np.shape(features[n_query:].T)}')
+    print(f'features[n_query:] : {np.shape(features[n_query:])}')
     scores = features[:n_query] @ features[n_query:].T
     print(f'scores : {type(scores)}')
     print(f'scores : {np.shape(scores)}')
@@ -34,6 +34,7 @@ def search():
     print(f'ranks : {type(ranks)}')
     print(f'ranks : {np.shape(ranks)}')
     print(f'ranks : {ranks[0]}')
+    print(f'ranks : {ranks[10]}')
     evaluate(ranks)
 
 
